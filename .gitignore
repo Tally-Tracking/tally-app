@@ -2,3 +2,8 @@ node_modules/
 dist/
 .DS_Store
 .claude/
+
+# Signing keys must never be committed: GitHub Pages publishes this repo.
+*.jks
+*.keystore
+keystore.properties
