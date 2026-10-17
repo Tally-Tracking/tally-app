@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The link's token is in the URL: never send it to another site. -->
+    <meta name="referrer" content="no-referrer">
+    <title>Tally - Confirm Email</title>
+    <link rel="stylesheet" href="auth-pages.css">
+</head>
+<body>
+    <!--
+      Opened from the "Confirm signup" email template. It shares its script
+      with reset-password.html (the Supabase Site URL) and handles every
+      kind of link the same way, a password reset included
+      (auth-link.js), so a link sent to the wrong page still works.
+    -->
+    <main class="container">
+        <h1>Tally</h1>
+        <div class="card">
+            <p id="loading" class="loading" role="status">Checking your link...</p>
+            <h2 id="title" tabindex="-1" hidden></h2>
+            <p id="text" class="text" role="status" hidden></p>
+            <form id="form" novalidate hidden>
+                <div class="field">
+                    <label for="password">New password</label>
+                    <input type="password" id="password" autocomplete="new-password" minlength="6" required aria-describedby="password-hint">
+                    <p class="hint" id="password-hint">At least 6 characters.</p>
+                </div>
+                <div class="field">
+                    <label for="confirm">Type it again</label>
+                    <input type="password" id="confirm" autocomplete="new-password" minlength="6" required>
+                </div>
+                <p id="form-error" class="form-error" role="alert" hidden></p>
+                <button class="btn" id="submit" type="submit">Update password</button>
+            </form>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"
+            integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK"
+            crossorigin="anonymous"></script>
+    <script type="module" src="auth-page.js"></script>
+</body>
+</html>
