@@ -96,7 +96,7 @@
 <body>
     <div class="container">
         <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: 18 October 2026</p>
+        <p class="updated">Last updated: 19 October 2026</p>
 
         <p>Tally ("we", "our", "the app") is a personal finance tracking application. Your privacy matters to us. This policy explains what data we collect, why, how we store it, and your rights.</p>
 
@@ -115,7 +115,7 @@
 
         <h3>Data we collect automatically</h3>
         <ul>
-            <li><span class="highlight">Anonymous usage events</span> (optional, can be turned off in Settings). When enabled, we collect a small set of structured events describing how you interact with the app - which screens you open, which buttons you tap, where you stop in a flow. These events are tied to a randomly-generated identifier stored in your device's secure storage, NOT your email or any personal information. The full list of events is published at <a href="https://github.com/Tally-Tracking/tally-native/blob/main/docs/analytics-events.md">docs/analytics-events.md</a> and updated whenever it changes. See section 5 "Usage Analytics" below for details.</li>
+            <li><span class="highlight">Anonymous usage events</span> (optional, can be turned off in Settings). When enabled, we collect a small set of structured events describing how you interact with the app - which screens you open, which buttons you tap, where you stop in a flow. These events are tied to a randomly-generated identifier stored in your device's secure storage, NOT your email or any personal information. Each event also carries basic details about your phone and the app, such as your phone's model, operating system, language and time zone, which the analytics software adds by itself. The full list of events is published at <a href="https://github.com/Tally-Tracking/tally-native/blob/main/docs/analytics-events.md">docs/analytics-events.md</a> and updated whenever it changes. See section 5 "Usage Analytics" below for details.</li>
             <li>If you choose to send a bug report via Settings, details that help us find the problem are added to the email: your device (model, OS version, screen size, battery level, connection type, language), the app version and your settings (such as theme, currency or how lists are sorted), sync status, how many bills, debts and goals you have, and recent app activity (on Android, also crash details). You can read everything before you send it. It <span class="highlight">never includes amounts, your income, names you have typed, your email address or your account ID.</span></li>
         </ul>
 
@@ -144,7 +144,7 @@
         <p>All your financial data is stored locally on your device in a private database that only the Tally app can access. This works without an internet connection or account.</p>
 
         <h3>In the cloud (optional)</h3>
-        <p>If you sign in, your data is encrypted in transit (HTTPS/TLS) and synced to our cloud database hosted by <a href="https://supabase.com">Supabase</a> (PostgreSQL). Supabase provides encryption at rest for all stored data. Your data is accessible only to your authenticated account.</p>
+        <p>If you sign in, your data is encrypted in transit (HTTPS/TLS) and synced to our cloud database hosted by <a href="https://supabase.com">Supabase</a> (PostgreSQL). Supabase provides encryption at rest for all stored data. Only your signed-in account can read your data through Tally: other users can't see it. Your synced data isn't end-to-end encrypted, so Tally's team can technically access the cloud database that stores it. We don't look at your data, except to fix a problem you've asked us to help with (and only with your permission), or where the law requires it.</p>
 
         <div class="card">
             <p class="highlight">You are always in control. You can use Tally entirely offline with no account. Cloud sync is optional and can be disabled at any time by signing out.</p>
@@ -156,7 +156,7 @@
             <li><span class="highlight">Supabase</span> (EU region) - cloud database and authentication. Stores your synced financial data if you sign in.</li>
             <li><span class="highlight">Google Sign-In</span> - optional authentication method (we receive your email address only).</li>
             <li><span class="highlight">Resend</span> (EU region, Ireland) - sends your account emails (sign-up confirmation and password reset). Receives your email address and the email it sends, nothing else.</li>
-            <li><span class="highlight">PostHog</span> (EU Cloud, Frankfurt) - anonymous usage analytics, only when enabled in Settings. Receives the events listed at <a href="https://github.com/Tally-Tracking/tally-native/blob/main/docs/analytics-events.md">docs/analytics-events.md</a>. Never receives financial data or PII.</li>
+            <li><span class="highlight">PostHog</span> (EU Cloud, Frankfurt) - anonymous usage analytics, only when enabled in Settings. Receives the events listed at <a href="https://github.com/Tally-Tracking/tally-native/blob/main/docs/analytics-events.md">docs/analytics-events.md</a>. Never receives financial data, anything you type into the app, your name or your email address.</li>
         </ul>
         <p>We do <span class="highlight">not</span> use:</p>
         <ul>
@@ -175,6 +175,17 @@
 
         <h3>Identification</h3>
         <p>Events are tied to a random UUID generated on first launch and stored in your device's secure keystore (iOS Keychain / Android EncryptedSharedPreferences). This is not your email, your name, or any device identifier. If you sign in, the random UUID is linked to your Tally account ID for retention analysis - we still do not use your email or other personal information as an identifier.</p>
+
+        <h3>Device details sent with each event</h3>
+        <p>The analytics software Tally uses (PostHog's own code inside the app) adds some basic details to every event by itself. Tally adds which platform you use (iPhone or Android) and the app version. Together, an event can carry:</p>
+        <ul>
+            <li><span class="highlight">The app</span> - its name, version, build number and package name. On iPhone, also whether it was installed through TestFlight or side-loaded</li>
+            <li><span class="highlight">Your phone</span> - its maker and model, whether it's a phone or a tablet, the operating system and its version, the screen size, and whether it's an emulator or simulator. On Android, also the device's code name (for example "lynx" for a Pixel 7a), the screen density and Android's standard system "user agent" text, which repeats the Android version and the model</li>
+            <li><span class="highlight">Language and time zone</span> - your phone's language (on Android, with its region, for example en-GB) and its time zone (for example Europe/London)</li>
+            <li><span class="highlight">Your connection</span> - whether you're on Wi-Fi or mobile data (on Android, also Bluetooth). On Android, also the name of your mobile network (for example "EE"). Never the name of your Wi-Fi network or your phone number</li>
+            <li><span class="highlight">Random IDs</span> - the random identifier described below and a random ID for each session of use. Never your phone's hardware or advertising identifiers</li>
+        </ul>
+        <p>It never includes the name you've given your phone. As with any service on the internet, PostHog also receives your phone's IP address when events are sent.</p>
 
         <h3>Your controls</h3>
         <ul>
@@ -195,6 +206,7 @@
             <li><span class="highlight">Supabase</span> - our cloud database provider, solely for the purpose of storing and syncing your data</li>
             <li><span class="highlight">Google</span> - solely for authentication if you use Google Sign-In</li>
             <li><span class="highlight">Resend</span> - our email provider, solely to send your account emails (sign-up confirmation and password reset)</li>
+            <li><span class="highlight">PostHog</span> - our analytics provider, solely to receive the usage events described in section 5, and only while analytics is on</li>
         </ul>
 
         <h2>7. Data Retention</h2>
@@ -220,19 +232,23 @@
         <ul>
             <li>All data transmitted between your device and our servers is encrypted using HTTPS/TLS</li>
             <li>Cloud data is encrypted at rest by our database provider (Supabase)</li>
+            <li>Our cloud database lets each signed-in account read only its own data. Synced data isn't end-to-end encrypted, so Tally's team can technically access it; see "In the cloud" in section 3 for when we would</li>
             <li>Passwords are hashed using industry-standard bcrypt (never stored in plaintext)</li>
             <li>Local data is stored in Android's private app sandbox, inaccessible to other apps</li>
             <li>Authentication uses secure JWT tokens with automatic expiry and refresh</li>
         </ul>
 
         <h2>10. Android Permissions</h2>
-        <p>Tally requests only the minimum permissions needed:</p>
+        <p>This is the full list of permissions the Android app has. Only notifications needs your agreement: Android asks you first (on Android 13 and later), and you can say no. Android grants the others when you install the app.</p>
         <ul>
-            <li><span class="badge">INTERNET</span> Cloud sync and authentication</li>
-            <li><span class="badge">POST_NOTIFICATIONS</span> Bill and debt payment reminders (requested at runtime, optional)</li>
-            <li><span class="badge">VIBRATE</span> Haptic feedback on button presses</li>
-            <li><span class="badge">RECEIVE_BOOT_COMPLETED</span> Reschedule notification alarms after device restart</li>
+            <li><span class="badge">INTERNET</span> Cloud sync and sign-in, and usage analytics if you leave it on</li>
+            <li><span class="badge">ACCESS_NETWORK_STATE</span> Tells the app whether you're on Wi-Fi or mobile data, not which network. It's used for the connection type in bug reports you choose to send, and the analytics software adds it to usage events while analytics is on (section 5)</li>
+            <li><span class="badge">POST_NOTIFICATIONS</span> Bill and debt payment reminders (Android asks you first, optional)</li>
+            <li><span class="badge">VIBRATE</span> Vibration feedback, such as when you pay off a debt</li>
+            <li><span class="badge">RECEIVE_BOOT_COMPLETED</span> Reschedules your reminders after the phone restarts</li>
+            <li><span class="badge">USE_BIOMETRIC</span> <span class="badge">USE_FINGERPRINT</span> Added by Android's sign-in library (Credential Manager, which Tally uses for Sign in with Google). Tally never asks for your fingerprint or face and doesn't use them</li>
         </ul>
+        <p>The app also carries one internal permission, <span class="badge" style="overflow-wrap: anywhere;">DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</span>, which Android's support library (AndroidX Core) adds so that only Tally itself can send messages to parts of the app. It gives no access to anything on your phone.</p>
         <p>We do <span class="highlight">not</span> request access to your camera, contacts, location, microphone, calendar, SMS, or files.</p>
 
         <h2>11. Children's Privacy</h2>
@@ -244,6 +260,7 @@
         <h2>13. Contact Us</h2>
         <p>If you have questions about this privacy policy or how your data is handled, contact us at:</p>
         <p><a href="mailto:tallytracking@gmail.com">tallytracking@gmail.com</a></p>
+        <p>For help using Tally, see our <a href="support.html">support page</a>.</p>
 
         <div class="card" style="margin-top: 40px;">
             <p style="color: var(--muted); font-size: 13px; margin: 0;">Tally is developed and maintained independently. We are committed to transparency and user privacy. This policy applies to the Tally app on Android and iOS.</p>
